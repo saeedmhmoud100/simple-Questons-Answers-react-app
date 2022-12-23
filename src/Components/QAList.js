@@ -1,12 +1,13 @@
 import { Button, Row } from "react-bootstrap";
 import Accordion from "react-bootstrap/Accordion";
-
+import { questions } from "../data";
 function QAList({ Data, DeleteOneItem }) {
+  const dataLocal = JSON.parse(localStorage.getItem("items"));
   const DeleteItem = (id) => {
-    if (Data.length > 0) {
+    if (dataLocal != null) {
       const item = Data.findIndex((i) => i.id === id);
-      Data.splice(item, 1);
-      DeleteOneItem(Data);
+      questions.splice(item, 1);
+      DeleteOneItem(questions);
     }
   };
   return (

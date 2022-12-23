@@ -5,16 +5,24 @@ import QAList from "./Components/QAList";
 import { questions } from "./data";
 function App() {
   const [Data, setData] = useState(questions);
+  const localData = JSON.parse(localStorage.getItem("items"));
   const AddItem = () => {
+    localStorage.setItem("items", JSON.stringify([...questions]));
     setData([...questions]);
   };
 
   const DeleteAllItems = () => {
+    localStorage.removeItem("items");
     setData([]);
     questions.splice(0, questions.length);
   };
   const DeleteOneItem = (newData) => {
+    localStorage.setItem("items", JSON.stringify([...newData]));
     setData([...newData]);
+    console.log(localData);
+    if (localData.length <= 1) {
+      DeleteAllItems();
+    }
   };
   return (
     <div className="App">
@@ -26,11 +34,11 @@ function App() {
           <Col sm="8" className="py-1">
             <FormInput AddItem={AddItem} />
 
-            {Data.length < 1 ? (
+            {localData == null ? (
               <h2 className="text-center my-5 fs-3">There are no questions</h2>
             ) : (
               <>
-                <QAList Data={Data} DeleteOneItem={DeleteOneItem} />
+                <QAList Data={localData} DeleteOneItem={DeleteOneItem} />
                 <Button
                   onClick={DeleteAllItems}
                   variant="primary"
