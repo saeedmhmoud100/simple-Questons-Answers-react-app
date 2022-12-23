@@ -1,7 +1,14 @@
 import { Button, Row } from "react-bootstrap";
 import Accordion from "react-bootstrap/Accordion";
 
-function QAList({ Data }) {
+function QAList({ Data, DeleteOneItem }) {
+  const DeleteItem = (id) => {
+    if (Data.length > 0) {
+      const item = Data.findIndex((i) => i.id === id);
+      Data.splice(item, 1);
+      DeleteOneItem(Data);
+    }
+  };
   return (
     <Row className="my-3">
       <Accordion>
@@ -11,7 +18,11 @@ function QAList({ Data }) {
             <Accordion.Body>
               <div className="d-flex justify-content-between">
                 <div className="py-2">{item.ans}</div>
-                <Button variant="primary" className="">
+                <Button
+                  onClick={() => DeleteItem(item.id)}
+                  variant="primary"
+                  className=""
+                >
                   Delete
                 </Button>
               </div>

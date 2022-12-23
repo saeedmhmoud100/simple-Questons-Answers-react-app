@@ -11,6 +11,7 @@ function FormInput({ AddItem }) {
     setq("");
     setans("");
   };
+
   return (
     <Row>
       <Col sm="5">

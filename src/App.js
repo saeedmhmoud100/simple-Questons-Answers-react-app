@@ -8,9 +8,13 @@ function App() {
   const AddItem = () => {
     setData([...questions]);
   };
+
   const DeleteAllItems = () => {
     setData([]);
     questions.splice(0, questions.length);
+  };
+  const DeleteOneItem = (newData) => {
+    setData([...newData]);
   };
   return (
     <div className="App">
@@ -26,9 +30,9 @@ function App() {
               <h2 className="text-center my-5 fs-3">There are no questions</h2>
             ) : (
               <>
-                <QAList Data={Data} />
+                <QAList Data={Data} DeleteOneItem={DeleteOneItem} />
                 <Button
-                  onClick={(_) => DeleteAllItems()}
+                  onClick={DeleteAllItems}
                   variant="primary"
                   className="w-100"
                 >
