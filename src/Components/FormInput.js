@@ -1,15 +1,20 @@
 import React, { useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { questions } from "../data";
-function FormInput({ AddItem }) {
+function FormInput({ AddItem, msg }) {
   const [q, setq] = useState("");
   const [ans, setans] = useState("");
 
   onsubmit = () => {
-    questions.push({ id: Math.random(), q: q, ans: ans });
-    AddItem();
-    setq("");
-    setans("");
+    if (ans === "" || q === "") {
+      console.log("yes");
+      msg("Enter a valid data!!", "error");
+    } else {
+      questions.push({ id: Math.random(), q: q, ans: ans });
+      AddItem();
+      setq("");
+      setans("");
+    }
   };
 
   return (
@@ -20,6 +25,7 @@ function FormInput({ AddItem }) {
           type="text"
           placeholder="Enter a question"
           value={q}
+          required
         />
       </Col>
       <Col sm="5">
