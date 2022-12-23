@@ -7,7 +7,6 @@ function FormInput({ AddItem, msg }) {
 
   onsubmit = () => {
     if (ans === "" || q === "") {
-      console.log("yes");
       msg("Enter a valid data!!", "error");
     } else {
       questions.push({ id: Math.random(), q: q, ans: ans });
