@@ -8,6 +8,10 @@ function App() {
   const AddItem = () => {
     setData([...questions]);
   };
+  const DeleteAllItems = () => {
+    setData([]);
+    questions.splice(0, questions.length);
+  };
   return (
     <div className="App">
       <Container className="p-5">
@@ -23,7 +27,11 @@ function App() {
             ) : (
               <>
                 <QAList Data={Data} />
-                <Button variant="primary" className="w-100">
+                <Button
+                  onClick={(_) => DeleteAllItems()}
+                  variant="primary"
+                  className="w-100"
+                >
                   Delete All
                 </Button>
               </>
